@@ -19,6 +19,10 @@ import tty
 import rclpy
 from std_msgs.msg import Float64
 
+from rclpy.signals import SignalHandlerOptions
+
+rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
+
 LEFT_TOPIC = "/wamv/thrusters/left/thrust"
 RIGHT_TOPIC = "/wamv/thrusters/right/thrust"
 
