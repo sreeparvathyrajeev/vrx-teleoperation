@@ -21,7 +21,7 @@ from std_msgs.msg import Float64
 
 from rclpy.signals import SignalHandlerOptions
 
-rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
+
 
 LEFT_TOPIC = "/wamv/thrusters/left/thrust"
 RIGHT_TOPIC = "/wamv/thrusters/right/thrust"
@@ -65,7 +65,7 @@ def parse_keys(data):
 def main():
     
 
-    rclpy.init()
+    rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
     node = rclpy.create_node("keyboard_teleop")
     left_pub = node.create_publisher(Float64, LEFT_TOPIC, 10)
     right_pub = node.create_publisher(Float64, RIGHT_TOPIC, 10)
@@ -78,9 +78,9 @@ def main():
 # This is important because changing terminal settings can leave the terminal in an unusable state if not properly restored.
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
-
-    print("WASD or arrow keys to drive. Hold to keep moving. Ctrl+C to quit.")
     time.sleep(0.5)  # let the publishers connect before the first command
+    print("WASD or arrow keys to drive. Hold to keep moving. Ctrl+C to quit.")
+    
 
     active = None
     last_key_time = 0.0
